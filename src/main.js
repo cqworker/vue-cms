@@ -20,7 +20,8 @@ import './permission'
 import './icons'
 // 全局 Mock 接口
 import './mock'
-
+//  这个里面的定义是什么神仙作用呢?use是做了什么?
+//  使用了组件库elementui
 Vue.use(ElementUI, {
   size: 'medium',
   i18n: (key, value) => i18n.t(key, value)
@@ -30,6 +31,7 @@ Vue.use(Notification)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
+//  找到app.vue中id为app的元素,路由,,国际化
 new Vue({
   el: '#app',
   router,

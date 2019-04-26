@@ -3,6 +3,7 @@
 </template>
 <script>
   import { debounce } from '@/utils'
+  import { insuranceDate } from '@/api/h5'
   let echarts = require('echarts/lib/echarts')
   require('echarts/lib/chart/line')
   require('echarts/lib/component/tooltip')
@@ -21,8 +22,40 @@
     data() {
       return {
         optionData: [],
-        legendData: ['交易总额', '营收', '净利润', '直接访问', '搜索引擎'],
-        xAxisData: this.getNearSixMonth()
+        legendData: ['停诊险', '百万医疗个人', '百万医疗家庭', '太保产妇意外', '重疾险'],
+        xAxisData: this.getNearSixMonth(),
+        yData: [
+          {
+            name: '停诊险领取量',
+            type: 'line',
+            stack: '总量',
+            data: [120, 132, 101, 134, 90, 230, 210]
+          },
+          {
+            name: '百万全家桶个人保单量',
+            type: 'line',
+            stack: '总量',
+            data: [220, 182, 191, 234, 290, 330, 310]
+          },
+          {
+            name: '百万全家桶全家保单量',
+            type: 'line',
+            stack: '总量',
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+          },
+          {
+            name: '产妇意外保单量',
+            type: 'line',
+            stack: '总量',
+            data: [150, 232, 201, 154, 190, 330, 410]
+          },
+          {
+            name: '重疾险保单量',
+            type: 'line',
+            stack: '总量',
+            data: [320, 332, 301, 334, 390, 330, 320]
+          }
+        ]
       }
     },
     methods: {
@@ -44,6 +77,7 @@
             }
           }
         }
+        console.log(value)
         return value
       },
       initChart() {
@@ -59,7 +93,7 @@
             top: '10px'
           },
           legend: {
-            data: ['交易总额', '营收', '净利润', '直接访问', '搜索引擎']
+            data: ['停诊险', '百万医疗个人', '百万医疗家庭', '太保产妇意外', '重疾险']
           },
           xAxis: {
             type: 'category',
@@ -69,42 +103,16 @@
           yAxis: {
             type: 'value'
           },
-          series: [
-            {
-              name: '交易总额',
-              type: 'line',
-              stack: '总量',
-              data: [120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-              name: '营收',
-              type: 'line',
-              stack: '总量',
-              data: [220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-              name: '净利润',
-              type: 'line',
-              stack: '总量',
-              data: [150, 232, 201, 154, 190, 330, 410]
-            },
-            {
-              name: '直接访问',
-              type: 'line',
-              stack: '总量',
-              data: [320, 332, 301, 334, 390, 330, 320]
-            },
-            {
-              name: '搜索引擎',
-              type: 'line',
-              stack: '总量',
-              data: [820, 932, 901, 934, 1290, 1330, 1320]
-            }
-          ]
+          series: this.yData
         })
       }
     },
     mounted() {
+      insuranceDate().then(resp => {
+//        this.yData = resp.data
+      }).catch(() => {
+        console.log('insuranceDate出现异常')
+      })
       this.$el.style.width = this.width
       this.$el.style.height = this.height
       this.initChart()

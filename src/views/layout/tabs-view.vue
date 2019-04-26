@@ -13,6 +13,7 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  //  这个是没有声明为组件的神仙东西呀,default是不是就是指文件名就是主机名呀?
   export default {
     data() {
       return {}

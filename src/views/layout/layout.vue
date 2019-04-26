@@ -1,5 +1,6 @@
 <template>
   <div class="app-wrapper">
+    <!--定义主页面的神仙布局-->
     <navbar></navbar>
     <sidebar></sidebar>
     <div class="main-container">

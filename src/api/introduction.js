@@ -7,7 +7,7 @@ import { isDev } from '@/utils'
 
 export function getImage() {
   if(isDev) {
-    // 【使用代理的话】
+    // 【使用代理的话】这是什么神仙代理?
     return axios.get('/api/getMovieImage')
     // return axios.get('http://dianying.nuomi.com/common/ranklist')
   } else {

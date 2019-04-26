@@ -14,6 +14,7 @@ const messages = {
     ...elementEnLocale
   },
   zh: {
+    // 这个...是什么神仙写法?
     ...zhLocale,
     ...elementZhLocale
   }

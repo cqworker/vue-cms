@@ -1,4 +1,5 @@
 <script>
+  //  这是侧边栏的每个小格子对应的组件 动态的把图标什么的神仙元素加上
   export default {
     name: 'menuItem',
     functional: true,

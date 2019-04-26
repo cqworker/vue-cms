@@ -51,6 +51,7 @@ export const constantRouterMap = [
         path: 'profile',
         name: 'Profile',
         component: () => import('@/views/user/profile'),
+        // icon是怎么通过神仙指定的?
         meta: {icon: 'warning', title: '个人中心'}
       },
       {
@@ -62,86 +63,101 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/introduction',
+    path: '/hospital',
     component: Layout,
-    redirect: '/introduction/index',
+    redirect: '/hospital/index',
+    meta: {
+      icon: 'question',
+      title: '医院管理'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/hospital/profile'),
+        meta: {title: '医院列表'}
+      }
+    ]
+  },
+  {
+    path: '/bxCompany',
+    component: Layout,
+    redirect: '/bxCompany/index',
+    meta: {
+      icon: 'question',
+      title: '保险公司'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/bxCompany/profile'),
+        meta: {title: '合作公司列表'}
+      }
+    ]
+  },
+  {
+    path: '/h5',
+    component: Layout,
+    redirect: '/h5/index',
     // alwaysShow: true,
     meta: {
       icon: 'question',
-      title: '简述'
+      title: 'h5'
     },
     children: [
       {
-        path: 'index',
-        name: 'Introduction',
-        component: () => import('@/views/introduction/index'),
-        meta: {icon: 'warning', title: '简述'}
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    component: Layout,
-    meta: {
-      icon: 'question',
-      title: '路由嵌套'
-    },
-    children: [
-      {
-        path: 'menu1',
-        meta: { icon: 'success', title: 'menu1' },
-        component: () => import('@/views/nested/menu1/index'),
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'menu1-1',
-            component: () => import('@/views/introduction/index'),
-            meta: {icon: 'error', title: 'menu1-1'}
-          },
-          {
-            path: 'menu1-2',
-            name: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2/index'),
-            alwaysShow: true,
-            meta: {icon: 'info', title: 'menu1-2'},
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/introduction/index'),
-                name: 'menu1-2-1',
-                meta: {icon: 'error', title: 'menu1-2-1'}
-              }
-            ]
-          }
-        ]
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/h5/info'),
+        meta: {icon: 'question', title: 'h5保单'}
       },
       {
-        path: 'menu2',
-        name: 'menu2',
-        component: () => import('@/views/introduction/index'),
-        meta: {icon: 'back', title: 'menu2'}
+        path: 'claim',
+        name: 'Claim',
+        component: () => import('@/views/h5/profile'),
+        meta: {icon: 'question', title: 'h5理赔'}
+      },
+      {
+        path: 'visit',
+        name: 'Visit',
+        component: () => import('@/views/h5/profile'),
+        meta: {icon: 'question', title: 'h5访问量'}
       }
     ]
   },
   {
-    path: '/custom-component',
+    path: '/mini',
     component: Layout,
+    redirect: '/mini/index',
+    // alwaysShow: true,
     meta: {
       icon: 'question',
-      title: '自定义组件'
+      title: '小程序'
     },
-    redirect: '/custom-component/index',
     children: [
       {
-        path: 'index',
-        name: 'CustomComponent',
-        component: () => import('@/views/custom-component/index'),
-        meta: {icon: 'warning', title: '自定义组件'}
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/user/profile'),
+        meta: {icon: 'question', title: '小程序保单'}
+      },
+      {
+        path: 'claim',
+        name: 'Claim',
+        component: () => import('@/views/user/profile'),
+        meta: {icon: 'question', title: '小程序理赔'}
+      },
+      {
+        path: 'visit',
+        name: 'Visit',
+        component: () => import('@/views/user/profile'),
+        meta: {icon: 'question', title: '小程序访问量'}
       }
     ]
   }
 ]
-
+// 以上定义了路由表,声明路由
 export default new Router({
   // mode: 'history',  require service support
   // scrollBehavior: () => ({ y: 0 }),

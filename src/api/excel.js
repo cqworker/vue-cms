@@ -7,7 +7,7 @@ import { isDev } from '@/utils'
 
 export function getTable() {
   if(isDev) {
-    // 开发环境有代理
+    // 开发环境有代理  在神仙哪?
     return axios.post('/api/getmoviepiaofang')
   } else {
     // 使用 mock 拦截请求来造数据

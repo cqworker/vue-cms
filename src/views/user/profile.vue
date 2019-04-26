@@ -24,6 +24,7 @@
         currentDate: ''
       }
     },
+    // get/set 理解成读取配置文件中的属性注入this vue实例
     computed: {
       ...mapGetters([
         'name',
