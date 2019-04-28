@@ -34,11 +34,10 @@ const user = {
   },
   actions: {
     // 用户登录
-    // commit 是什么神仙操作?
     login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(resp => {
-          let data = resp.retData
+          let data = resp.data
           // 设置token
           setToken(data.token)
           commit(SET_TOKEN, data.token)
