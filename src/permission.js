@@ -10,7 +10,8 @@ import { getToken } from '@/common/auth'
 
 NProgress.configure({ showSpinner: false })
 
-// 路由全局前置守卫
+// 路由全局前置守卫,是在什么实际完成的呢?
+// 验证用户成功后,生成token,在每次访问接口时带上,如果过期或者伪造返回false,清空token
 const whiteList = ['/login']  // 白名单
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
@@ -24,11 +25,13 @@ router.beforeEach((to, from, next) => {
       if (store.getters.permissions.length === 0) {
         store.dispatch('pullUserInfo').then(resp => {
           const permissions = resp.permissions
+          // commit 和dispatch的区别 同步/异步
           store.dispatch('GenerateRoutes', { permissions }).then(() => {
             // 动态添加可访问路由表
             router.addRoutes(store.getters.addRouters)
-            // console.log(to)
-            // console.log({...to})
+            console.log('定位到了')
+            console.log(to)
+            console.log({...to})
             // hack方法 确保addRoutes已完成，set the replace: true so the navigation will not leave a history record
             // 这样我们就可以简单的通过 `next(to)` 巧妙的避开之前的那个问题了。这行代码重新进入 `router.beforeEach` 这个钩子，这时候再通过 `next()` 来释放钩子，就能确保所有的路由都已经挂载完成了。
             next({

@@ -7,11 +7,11 @@ import { isDev } from '@/utils'
 
 export function getImage() {
   if(isDev) {
-    // 【使用代理的话】这是什么神仙代理?
+    // mock 代理
     return axios.get('/api/getMovieImage')
     // return axios.get('http://dianying.nuomi.com/common/ranklist')
   } else {
-    // 【没有代理的话】
+    // 根据环境参数决定 接口请求路径
     let url = 'https://api.douban.com/v2/movie/in_theaters'
     let option = {
       param: 'callback'
@@ -21,6 +21,7 @@ export function getImage() {
       count: 10, // 单页条数
       city: '深圳' // 城市
     }
+    // 使用jsonp进行跨域
     return jsonp(url, data, option)
   }
 }

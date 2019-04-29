@@ -1,8 +1,5 @@
 <template>
   <el-container class="login-container">
-    <el-switch v-model="toggleParticles"
-      inactive-color="#ff4949">
-    ></el-switch>
     <el-card class="animated flipInY">
       <div slot="header" class="el-card-header">
         <img src="../../../static/image/login-logo.png" alt="">
@@ -24,6 +21,8 @@
         <el-form-item :label="$t('login.remember')" label-width="80px">
           <el-switch v-model="remember"></el-switch>
         </el-form-item>
+        <!--点击事件如何携带form参数-->
+        <!--如何从i8n中获取配置-->
         <el-button type="primary" @click="onLogin('loginForm')" :loading="loading">{{$t('login.login')}}</el-button>
       </el-form>
     </el-card>
@@ -40,8 +39,10 @@
   export default {
     data() {
       // username 验证
+      // const let var
       const validateUsername = (rule, value, callback) => {
         if (!isValidUsername(value)) {
+          // 这里的callback是怎么生效的?
           callback(new Error('请输入正确的用户名'))
         } else {
           callback()
@@ -56,14 +57,13 @@
         }
       }
       return {
-        // 粒子开关
-        toggleParticles: false,
         loginForm: {
           username: 'admin',
           pwd: '123456'
         },
         remember: false,
         loading: false,
+        // 为输入框加上触发动作的,validator 验证器
         rules: {
           username: [
             { required: true, message: '请输入账号', trigger: 'blur' },
@@ -95,14 +95,19 @@
       ]),
       // 用户名输入框回车后切换到密码输入框
       goToPwdInput() {
+        // 元素定位方法1,$el:ref=pwd的root dom;注意dom对象和js对象间的转换
         this.$refs.pwd.$el.getElementsByTagName('input')[0].focus()
+//        this.$refs.pwd.focus()
       },
       // 登录操作
       onLogin() {
+        // 失去焦点
         this.$refs.pwd.$el.getElementsByTagName('input')[0].blur()
+        // form 对象的自有方法,做了哪些验证呢?
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.loading = true
+            // 使用上一步中从store中get的login()
             this.login(this.loginForm).then(() => {
               // 保存账号
               if (this.remember) {
@@ -123,6 +128,7 @@
           }
         })
       },
+      // 页面提示
       accountTip() {
         this.$notify({
           title: '账号：admin',
@@ -134,118 +140,6 @@
       }
     },
     watch: {
-      toggleParticles(val) {
-        if(val) {
-          particlesJS('particles', {
-            "particles": {
-              "number": {
-                "value": 15
-              },
-              "color": {
-                "value": "random"
-              },
-              "shape": {
-                "type": ["star", "image"],
-                "stroke": {
-                  "width": 0,
-                  "color": "yellow"
-                },
-                "polygon": {
-                  "nb_sides": 5
-                },
-                "image": {
-                  "src": "https://neveryu.github.io/avatar/avatar.png",
-                  "width": 100,
-                  "height": 100
-                }
-              },
-              "opacity": {
-                "value": 1,
-                "random": false,
-                "anim": {
-                  "enable": true,
-                  "speed": 1,
-                  "opacity_min": 0.1,
-                  "sync": false
-                }
-              },
-              "size": {
-                "value": 10,
-                "random": true,
-                "anim": {
-                  "enable": true,
-                  "speed": 10,
-                  "size_min": 0.1,
-                  "sync": false
-                }
-              },
-              "line_linked": {
-                "enable": false,
-                "distance": 150,
-                "color": "#ccc",
-                "opacity": 0.4,
-                "width": 1
-              },
-              "move": {
-                "enable": true,
-                "speed": 2,
-                "direction": "random",
-                "random": true,
-                "straight": false,
-                "out_mode": "out",
-                "attract": {
-                  "enable": false,
-                  "rotateX": 600,
-                  "rotateY": 1200
-                }
-              }
-            },
-            "interactivity": {
-              // "detect_on": "canvas",
-              "detect_on": "window",
-              "events": {
-                "onhover": {
-                  "enable": false,
-                  // "mode": "repulse"
-                  "mode": "grab"
-                },
-                "onclick": {
-                  "enable": false,
-                  "mode": "repulse"
-                  // "mode": "push"
-                },
-                "resize": true
-              },
-              "modes": {
-                "grab": {
-                  "distance": 400,
-                  "line_linked": {
-                    "opacity": 1
-                  }
-                },
-                "bubble": {
-                  "distance": 400,
-                  "size": 40,
-                  "duration": 2,
-                  "opacity": 8,
-                  "speed": 3
-                },
-                "repulse": {
-                  "distance": 200
-                },
-                "push": {
-                  "particles_nb": 4
-                },
-                "remove": {
-                  "particles_nb": 2
-                }
-              }
-            }
-          })
-        } else {
-          document.getElementById('particles').innerHTML = ''
-        }
-      }
     },
     mounted() {
     }

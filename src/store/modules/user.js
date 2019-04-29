@@ -34,17 +34,22 @@ const user = {
   },
   actions: {
     // 用户登录
+    // { commit } 是什么神仙?(vuex,store,commit) promise又是什么?(链)
     login({ commit }, userInfo) {
+      // 字面意思:许诺     决定      拒绝
       return new Promise((resolve, reject) => {
+        // TODO 封装过后的userinfo
         login(userInfo).then(resp => {
+          // 获取userMap[i]
           let data = resp.data
-          // 设置token
+          // 设置token,value
           setToken(data.token)
+          // 全局变量,利用commit可追溯可做到类似于git的版本控制
           commit(SET_TOKEN, data.token)
-          // commit(SET_NAME, data.name)
-          // commit(SET_AGE, data.age)
-          // commit(SET_AVATAR, data.avatar)
-          // commit(SET_PERMISSIONS, data.permissions)
+          commit(SET_NAME, data.name)
+          commit(SET_AGE, data.age)
+          commit(SET_AVATAR, data.avatar)
+          commit(SET_PERMISSIONS, data.permissions)
           return resolve()
         }).catch(err => {
           return reject(err)

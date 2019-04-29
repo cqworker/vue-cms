@@ -10,6 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // 代理
     proxyTable: {
         '/api/getmoviepiaofang': {
             target: 'http://dianying.nuomi.com/movie/boxrefresh',

@@ -8,6 +8,7 @@ import permission from './modules/permission'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  // 包含多个
   modules: {
     user,
     tabsview,

@@ -20,7 +20,6 @@ import './permission'
 import './icons'
 // 全局 Mock 接口
 import './mock'
-//  这个里面的定义是什么神仙作用呢?use是做了什么?
 //  使用了组件库elementui
 Vue.use(ElementUI, {
   size: 'medium',

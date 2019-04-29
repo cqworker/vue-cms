@@ -20,6 +20,6 @@ git commit -m 'deploy'
 # 手动部署
 # git push -f git@github.com:Neveryu/vue-cms.git master:gh-pages
 # 自动部署
-git push -f "https://${access_token}@github.com/Neveryu/vue-cms.git" master:gh-pages
+git push -f "git@github.com:cqworker/vue-cms.git" master:gh-pages
 
 cd -

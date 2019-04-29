@@ -12,6 +12,13 @@ const userMap = {
     permissions: '/excel,/clipboard',
     avatar: './static/image/avatar/0.jpg'
   },
+  xinan: {
+    token: 'xinan',
+    name: 'xinan',
+    age: 12,
+    permissions: '/clipboard',
+    avatar: './static/image/avatar/1.jpg'
+  },
   lucy: {
     token: 'lucy',
     name: 'Lucy',
